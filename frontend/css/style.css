@@ -1,59 +1,161 @@
+:root {
+  /* Cores modernas e com bom contraste */
+  --cor-fundo: #2c3e50; /* Cinza-azulado escuro */
+  --cor-primaria: #3498db; /* Azul vibrante */
+  --cor-secundaria: #ecf0f1; /* Cinza claro */
+  --cor-texto: #ffffff; /* Branco puro */
+  --cor-card: #34495e; /* Cinza escuro para seções e cards */
+  --cor-hover: #2980b9; /* Azul um pouco mais escuro */
+}
+
+/* --- Estilos Gerais para o Body --- */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #4a148c; /* Roxo escuro para o fundo */
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-  
-  h1 {
-    color: #e1bee7; /* Roxo claro para o título */
-    text-align: center;
-  }
-  
-  section {
-    background-color: #6a1b9a; /* Roxo médio para a seção */
-    padding: 20px;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 400px;
-  }
-  
-  input[type="text"] {
-    width: 95%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #9c27b0;
-    border-radius: 5px;
-    background-color: #4a148c;
-    color: white;
-  }
-  
-  button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #9c27b0; /* Roxo claro para o botão */
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #e1bee7; /* Roxo quase branco ao passar o mouse */
-    color: #4a148c;
-  }
-  
-  #resAluno {
-    margin-top: 15px;
-    padding: 10px;
-    background-color: #4a148c;
-    border: 1px solid #9c27b0;
-    border-radius: 5px;
-    min-height: 40px;
-  }
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+h1 {
+  color: var(--cor-primaria);
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+/* --- Estilos para a Página Principal (Menu) --- */
+/* Estes estilos são para os links da página inicial (index.html) */
+body > a {
+  text-decoration: none;
+  color: var(--cor-texto);
+  background-color: var(--cor-primaria);
+  padding: 15px 30px;
+  margin: 10px 0;
+  border-radius: 8px;
+  font-size: 1.2em;
+  font-weight: bold;
+  width: 250px;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+body > a:hover {
+  background-color: var(--cor-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+body > a:active {
+  transform: translateY(0);
+}
+
+/* --- Estilos para as Páginas de Formulário --- */
+/* Estes estilos são para as páginas como aluno.html, livro.html, etc. */
+section {
+  background-color: var(--cor-card);
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+section label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid var(--cor-card);
+  border-radius: 8px;
+  background-color: #44586e;
+  color: var(--cor-texto);
+  font-size: 1em;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  outline: none;
+  border-color: var(--cor-primaria);
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--cor-primaria);
+  color: var(--cor-texto);
+  font-weight: bold;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--cor-hover);
+  transform: translateY(-2px);
+}
+
+#resAluno {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: var(--cor-card);
+  border: 1px solid #4a637d;
+  border-radius: 8px;
+  min-height: 50px;
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+#resCadastrar {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: var(--cor-card);
+  border: 1px solid #4a637d;
+  border-radius: 8px;
+  min-height: 50px;
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+.voltar-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.btn-voltar {
+  text-decoration: none;
+  background-color: var(--cor-card);
+  color: var(--cor-secundaria);
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: normal;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+  width: auto;
+}
+
+.btn-voltar:hover {
+  background-color: #4a637d;
+  transform: translateY(-1px);
+  color: var(--cor-texto);
+}
