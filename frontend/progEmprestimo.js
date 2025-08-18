@@ -1,121 +1,126 @@
-let resFab = document.getElementById('resFab')
-let cadastrarFab = document.getElementById('cadastrarFab')
+// Referências aos elementos da página
+let btnCadastrar = document.getElementById('btnCadastrar');
+let resCadastrar = document.getElementById('resCadastrar');
 
-let resAtualFab = document.getElementById('resAtualFab')
-let atualizarFab = document.getElementById('atualizarFab')
+let btnListar = document.getElementById('btnListar');
+let resListar = document.getElementById('resListar');
 
-let resApagarFab = document.getElementById('resApagarFab')
-let apagarFab = document.getElementById('apagarFab')
+let btnAtualizar = document.getElementById('btnAtualizar');
+let resAtualizar = document.getElementById('resAtualizar');
 
-let resFabList = document.getElementById('resFabList')
-let listarFab = document.getElementById('listarFab')
+let btnApagar = document.getElementById('btnApagar');
+let resApagar = document.getElementById('resApagar');
 
-cadastrarFab.addEventListener('click', (e)=>{
-    e.preventDefault()
+// Cadastrar Empréstimo
+btnCadastrar.addEventListener('click', (e) => {
+    e.preventDefault();
 
-    let nome = document.getElementById('nome').value
+    let dataEmprestimo = document.getElementById('dataEmprestimo').value;
+    let codAluno = Number(document.getElementById('codAluno').value);
+    let codLivro = Number(document.getElementById('codLivro').value);
 
     const valores = {
-        nome: nome
-    }
+        dataEmprestimo,
+        codAluno,
+        codLivro
+    };
 
-    fetch(`http://localhost:3000/fabricante`,{
+    fetch('http://localhost:3000/emprestimo', {
         method: 'POST',
-        headers: {
-            'Content-Type':'application/json'
-        },
-        body:JSON.stringify(valores)
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(valores)
     })
     .then(resp => resp.json())
     .then(dados => {
-        console.log(dados)
-        resFab.innerHTML = ``
-        resFab.innerHTML += `<hr>`        
-        resFab.innerHTML += `Código: ${dados.codFabricante}   ${dados.nome} <br>`
-        resFab.innerHTML += `<hr>`        
-
+        console.log(dados);
+        resCadastrar.innerHTML = `
+            <hr>
+            ID: ${dados.id} | Data: ${dados.dataEmprestimo} | Aluno: ${dados.codAluno} | Livro: ${dados.codLivro}<br>
+            <hr>
+        `;
     })
-    .catch((err)=>{
-        console.error('Erro na recepção de dados',err)
+    .catch((err) => {
+        console.error('Erro ao cadastrar empréstimo', err);
+    });
+});
+
+// Listar Empréstimos
+btnListar.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    fetch('http://localhost:3000/emprestimo')
+    .then(resp => resp.json())
+    .then(dados => {
+        console.log(dados);
+
+        resListar.innerHTML = '<hr>';
+
+        dados.forEach(dad => {
+            resListar.innerHTML += `
+                ID: ${dad.id} | Data: ${dad.dataEmprestimo} | Aluno: ${dad.codAluno} | Livro: ${dad.codLivro}<br>
+                <hr>
+            `;
+        });
     })
+    .catch((err) => {
+        console.error('Erro ao listar empréstimos', err);
+    });
+});
 
-})
+// Atualizar Empréstimo
+btnAtualizar.addEventListener('click', (e) => {
+    e.preventDefault();
 
-atualizarFab.addEventListener('click', (e)=>{
-
-    e.preventDefault()
-
-    let codFabricante = Number(document.getElementById('codFabricante').value)
-    let nomeAtual = document.getElementById('nomeAtual').value
+    let id = Number(document.getElementById('idEmprestimoAtualizar').value);
+    let novaData = document.getElementById('dataEmprestimoAtualizar').value;
+    let novoCodAluno = Number(document.getElementById('codAlunoAtualizar').value);
+    let novoCodLivro = Number(document.getElementById('codLivroAtualizar').value);
 
     const valores = {
-        nome: nomeAtual
-    }
+        dataEmprestimo: novaData,
+        codAluno: novoCodAluno,
+        codLivro: novoCodLivro
+    };
 
-    fetch(`http://localhost:3000/fabricante/${codFabricante}`,{
+    fetch(`http://localhost:3000/emprestimo/${id}`, {
         method: 'PUT',
-        headers: {
-            'Content-Type':'application/json'
-        },
-        body:JSON.stringify(valores)
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(valores)
     })
     .then(resp => resp.json())
     .then(dados => {
-        console.log(dados)
-        resFab.innerHTML = ``
-        resFab.innerHTML += `<hr>`        
-        resFab.innerHTML += `Código: ${dados.codFabricante}   Nome: ${dados.nome} <br>`
-        resFab.innerHTML += `<hr>`        
-
+        console.log(dados);
+        resAtualizar.innerHTML = `
+            <hr>
+            Empréstimo atualizado: ID ${dados.id} | Data: ${dados.dataEmprestimo} | Aluno: ${dados.codAluno} | Livro: ${dados.codLivro}<br>
+            <hr>
+        `;
     })
-    .catch((err)=>{
-        console.error('Erro na recepção de dados',err)
-    })
+    .catch((err) => {
+        console.error('Erro ao atualizar empréstimo', err);
+    });
+});
 
-})
+// Apagar Empréstimo
+btnApagar.addEventListener('click', (e) => {
+    e.preventDefault();
 
-apagarFab.addEventListener('click', (e)=>{
-    e.preventDefault()
-    let codFab = Number(document.getElementById('codFab').value)
+    let id = Number(document.getElementById('idEmprestimoApagar').value);
 
-    fetch(`http://localhost:3000/fabricante/${codFab}`,{
+    fetch(`http://localhost:3000/emprestimo/${id}`, {
         method: 'DELETE',
-        headers: {
-            'Content-Type':'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' }
     })
     .then(resp => {
         if (resp.status === 204) {
-            resApagarFab.innerHTML = ``
-            resApagarFab.innerHTML += `Dados Excluídos com sucesso!`
+            resApagar.innerHTML = 'Dados excluídos com sucesso!';
+        } else if (resp.status === 404) {
+            resApagar.innerHTML = '<p style="color:red;">Empréstimo não encontrado.</p>';
+        } else {
+            resApagar.innerHTML = `<p style="color:red;">Erro: ${resp.status}</p>`;
         }
     })
-    .catch((err)=>{
-        console.error('Erro na recepção de dados',err)
-    })
-
-
-})
-
-listarFab.addEventListener('click', (e)=>{
-    e.preventDefault()
-
-    fetch(`http://localhost:3000/fabricante`)
-    .then(resp => resp.json())
-    .then(dados => {
-        console.log(dados)
-
-        resFabList.innerHTML = ``
-        resFabList.innerHTML += `<hr>`
-        
-        dados.forEach(dad => {
-            resFabList.innerHTML += `Código: ${dad.codFabricante} | ${dad.nome} <br>`
-            resFabList.innerHTML += `<hr>`
-        })
-        
-    })
-    .catch((err)=>{
-        console.error('Erro na recepção de dados',err)
-    })
-})
-
+    .catch((err) => {
+        console.error('Erro na recepção de dados', err);
+    });
+});

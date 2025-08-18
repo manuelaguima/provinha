@@ -1,22 +1,73 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
-    <script src="./progEmprestimo.js" defer></script>
-    <title>Sistema</title>
+    <script src="progEmprestimo.js" defer></script>
+    <title></title>
 </head>
-
-<body>
-    <div class="voltar-container">
+<div class="voltar-container">
         <a href="./index.html" class="btn-voltar">Voltar</a>
     </div>
-        <section>
-            <label for="titulo">Título do Livro:</label>
-            <input type="text" id="titulo" placeholder="Título do livro" required>
+    <h1>Sistema de Emprestimo</h1>
+
+    <section>
+        <h2>Cadastrar Empréstimo</h2>
+        <form id="formCadastrarEmprestimo">
+            <label for="dataEmprestimo">Data do Empréstimo:</label>
+            <input type="date" id="dataEmprestimo">
+            
+            <label for="codAluno">Código do Aluno:</label>
+            <input type="number" id="codAluno" placeholder="código do aluno">
+            
+            <label for="codLivro">Código do Livro:</label>
+            <input type="number" id="codLivro" placeholder="código do livro">
         
-        </section>
-</body>
-</html>
+            <button type="submit" id="btnCadastrar">Cadastrar</button>
+        </form>
+        <div id="resCadastrar"></div>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>Listar Empréstimos</h2>
+        <button id="btnListar">Listar Todos</button>
+        <div id="resListar"></div>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>Atualizar Empréstimo</h2>
+        <form id="formAtualizarEmprestimo">
+            <label for="idEmprestimoAtualizar">ID do Empréstimo:</label>
+            <input type="number" id="idEmprestimoAtualizar" placeholder="ID para atualizar">
+            
+            <label for="dataEmprestimoAtualizar">Nova Data:</label>
+            <input type="date" id="dataEmprestimoAtualizar">
+
+            <label for="codAlunoAtualizar">Novo Código do Aluno:</label>
+            <input type="number" id="codAlunoAtualizar" placeholder="código do aluno">
+
+            <label for="codLivroAtualizar">Novo Código do Livro:</label>
+            <input type="number" id="codLivroAtualizar" placeholder="código do livro">
+        
+            <button type="submit" id="btnAtualizar">Atualizar</button>
+        </form>
+        <div id="resAtualizar"></div>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>Apagar Empréstimo</h2>
+        <form id="formApagarEmprestimo">
+            <label for="idEmprestimoApagar">ID do Empréstimo:</label>
+            <input type="number" id="idEmprestimoApagar" placeholder="ID para apagar">
+        
+            <button type="submit" id="btnApagar">Apagar</button>
+        </form>
+        <div id="resApagar"></div>
+    </section>

@@ -1,8 +1,9 @@
 let resLivro = document.getElementById('resLivro')
 let formCadastrarLivro = document.getElementById('formCadastrarLivro')
 
-formCadastrarLivro.addEventListener('click',(e)=>{
+formCadastrarLivro.addEventListener('submit',(e)=>{
     e.preventDefault()
+
     let titulo = document.getElementById('titulo').value
     let quantidade = Number(document.getElementById('quantidade').value)
     let autor = document.getElementById('autor').value
